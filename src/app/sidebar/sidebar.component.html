@@ -1,0 +1,4 @@
+<mat-nav-list>
+    <a mat-list-item routerLink="/" [routerLinkActive]="['active']" [queryParams]="{id: pattern.file}" *ngFor="let pattern of available_patterns"> {{ pattern.name }} </a>
+ </mat-nav-list>
+ 

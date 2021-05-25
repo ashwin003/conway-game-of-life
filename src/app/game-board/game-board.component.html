@@ -1,0 +1,16 @@
+<app-terminal class="terminal">
+  <app-board
+    [initialPositions]="positions"
+    [isInteractive]="isInteractive"
+    [isPlaying]="isPlaying"
+  ></app-board>
+</app-terminal>
+<mat-toolbar>
+  <button mat-icon-button color="primary" (click)="handleClick()" [matTooltip]="buttonText">
+    <mat-icon>{{ buttonText }}</mat-icon>
+  </button>
+
+  <button mat-icon-button color="accent" (click)="clearPositions()" matTooltip="Clear" [disabled]="!isInteractive">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
