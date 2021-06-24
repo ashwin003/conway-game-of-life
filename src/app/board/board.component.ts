@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Position } from '../models/position';
 import * as p5 from 'p5';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-board',
@@ -181,7 +182,10 @@ export class BoardComponent implements OnInit, OnChanges {
   createBox(s: any, i: number, j: number, boxSize: number, isFilled: boolean) {
     const x = i * boxSize,
       y = j * boxSize;
-    s.stroke(255);
+
+    if(environment.showGrid) {
+      s.stroke(255);
+    }
     s.strokeWeight(0.5);
     s.fill(isFilled ? 255 : 0);
     s.rect(x, y, boxSize, boxSize);
