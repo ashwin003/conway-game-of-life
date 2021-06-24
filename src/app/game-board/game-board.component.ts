@@ -27,10 +27,10 @@ export class GameBoardComponent implements OnInit {
 
         const pattern: Pattern = {
           name: 'Pattern Name',
-          file: 'assets/patterns/' + id + '.json',
+          file: 'assets/patterns/' + id,
         };
         this.patternLoaderService
-          .load(pattern)
+          .loadCsv(pattern)
           .subscribe((positions) => (this.positions = positions));
 
         this.isPlaying = true;
