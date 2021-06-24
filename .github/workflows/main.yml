@@ -1,0 +1,23 @@
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build-and-deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Angular Deploy gh-pages Actions
+      uses: AhsanAyaz/angular-deploy-gh-pages-actions@0e4f1a953d00116ca38fbf1bcdb37f91923015ef 
+      with:
+        github_access_token: ${{ secrets.ACCESS_TOKEN }} # see the Configuration section for how you can create secrets
+        build_configuration: production # The build environment for the app. please look configurations in your angular.json
+        base_href: /gravity-rip-helper/   # make sure this corresponds to https://<your_username>.github.io/<base_href>/
+        deploy_branch: gh-pages # The branch the action should deploy to.
+        angular_dist_build_folder: dist/conway-game-of-life # The folder where your project is supposed to be after running ng build by the action.
+    - name: Automated Version Bump
+      uses: phips28/gh-action-bump-version@v8.0.18
+      
