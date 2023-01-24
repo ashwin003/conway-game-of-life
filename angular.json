@@ -114,5 +114,7 @@
       }
     }
   },
-  "defaultProject": "conway-game-of-life"
+  "cli": {
+    "analytics": "35af835e-55ad-473c-94aa-2734ca0883b2"
+  }
 }
