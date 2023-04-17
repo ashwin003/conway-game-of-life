@@ -22,7 +22,8 @@ export class BoardComponent implements OnInit, OnChanges {
   constructor() {}
 
   ngOnChanges(changes: { [propName: string]: any }) {
-    const initialPositionsChanged = Object.keys(changes).includes('initialPositions');
+    const initialPositionsChanged =
+      Object.keys(changes).includes('initialPositions');
     if (initialPositionsChanged || (this.isInteractive && this.isPlaying)) {
       this.grid = this.prepareGrid(
         this.nRows,
@@ -50,7 +51,7 @@ export class BoardComponent implements OnInit, OnChanges {
       s.draw = () => {
         this.drawGrid(s, this.grid, this.boxSize);
 
-        if(this.isPlaying) {
+        if (this.isPlaying) {
           this.grid = this.update(this.grid);
         }
       };
@@ -61,17 +62,23 @@ export class BoardComponent implements OnInit, OnChanges {
           const i = Math.floor(mouseX / this.boxSize);
           const j = Math.floor(mouseY / this.boxSize);
 
-          this.grid[i][j] = 1 - this.grid[i][j];
+          try {
+            this.grid[i][j] = 1 - this.grid[i][j];
 
-          const position = {x: i, y: j};
+            const position = { x: i, y: j };
 
-          if(this.grid[i][j] === 1) {
-            this.initialPositions.push(position);
-          } else {
-            const index = this.initialPositions.findIndex(p => p.x === position.x && p.y === position.y);
-            if(index !== -1) {
-              this.initialPositions.splice(index, 1);
+            if (this.grid[i][j] === 1) {
+              this.initialPositions.push(position);
+            } else {
+              const index = this.initialPositions.findIndex(
+                (p) => p.x === position.x && p.y === position.y
+              );
+              if (index !== -1) {
+                this.initialPositions.splice(index, 1);
+              }
             }
+          } catch(e) {
+            console.error('Error', e);
           }
         }
       };
@@ -183,7 +190,7 @@ export class BoardComponent implements OnInit, OnChanges {
     const x = i * boxSize,
       y = j * boxSize;
 
-    if(environment.showGrid) {
+    if (environment.showGrid) {
       s.stroke(255);
     }
     s.strokeWeight(0.5);
